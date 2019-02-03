@@ -14,8 +14,11 @@
         <div class="box">
             @foreach ($project->tasks as $task)
                 <div>
-                    <form method="POST" action="/tasks/{{ $task->id }}">
-                        @method('PATCH')
+                    <form method="POST" action="/completed-tasks/{{ $task->id }}">
+                        @if ($task->completed)
+                            @method('DELETE')
+                        @endif
+
                         @csrf
 
                         <label for="completed"
@@ -36,7 +39,8 @@
         <div class="field">
             <label class="label" for="description">New Task</label>
             <div class="control">
-                <input class="input" type="text" name="description" placeholder="New Task">
+                <input class="input" type="text" name="description" placeholder="New Task"
+                        required>
             </div>
         </div>
         <div class="field">
@@ -44,5 +48,6 @@
                 <button type="submit" class="button is-link">Add Task</button>
             </div>
         </div>
+        @include('parts.errors')
     </form>
 @endsection

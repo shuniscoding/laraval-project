@@ -10,7 +10,9 @@
             <div class="control">
                 <input type="text" name="title" placeholder="Project title"
                     class="input {{ $errors->has('title') ? 'is-danger' : '' }}"
-                    value="{{ old('title') }}">
+                    value="{{ old('title') }}"
+                    required
+                    >
             </div>
         </div>
         <div class="field">
@@ -18,6 +20,7 @@
             <div class="control">
                 <textarea name="description" placeholder="Project descrption"
                         class="input {{ $errors->has('title') ? 'is-danger' : '' }}"
+                        required
                         >{{ old('description') }}</textarea>
             </div>
         </div>
@@ -26,14 +29,6 @@
                 <button type="submit" class="button is-link">Create Project</button>
             </div>
         </div>
-        @if ($errors->any())
-            <div class="notification is-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('parts.errors')
     </form>
 @endsection
